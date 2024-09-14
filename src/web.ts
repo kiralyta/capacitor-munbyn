@@ -23,6 +23,10 @@ export class CapacitorMunbynWeb
     throw this.unimplemented('Not implemented on web.');
   }
 
+  async align(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
   async print(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
   }

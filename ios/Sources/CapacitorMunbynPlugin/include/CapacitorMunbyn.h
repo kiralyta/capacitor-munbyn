@@ -10,6 +10,7 @@
 - (void)disconnect:(CAPPluginCall *)call;
 - (void)newLine:(CAPPluginCall *)call;
 - (void)cut:(CAPPluginCall *)call;
+- (void)align:(CAPPluginCall *)call;
 - (void)print:(CAPPluginCall *)call;
 - (void)tableHeader:(CAPPluginCall *)call;
 

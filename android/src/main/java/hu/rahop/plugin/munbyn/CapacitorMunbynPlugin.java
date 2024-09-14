@@ -45,4 +45,9 @@ public class CapacitorMunbynPlugin extends Plugin {
     public void tableHeader(PluginCall call) {
         call.unimplemented("Not implemented on Android.");
     }
+
+    @PluginMethod
+    public void align(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
+    }
 }

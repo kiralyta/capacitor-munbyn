@@ -4,6 +4,7 @@ export interface CapacitorMunbynPlugin {
   disconnect(): Promise<void>;
   newLine(): Promise<void>;
   cut(): Promise<void>;
+  align(options: AlignOptions): Promise<void>;
   print(options: SendCommandOptions): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;
 
@@ -15,6 +16,11 @@ export interface CapacitorMunbynPlugin {
 // Define types for sending commands to the BLE or WiFi device
 export interface SendCommandOptions {
   text: string; // Command string to send (e.g., text to print or barcode data)
+}
+
+// Define types for sending commands to the BLE or WiFi device
+export interface AlignOptions {
+  to: string; // left / right / center
 }
 
 // Define types for WiFi connection options

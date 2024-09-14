@@ -17,6 +17,7 @@ npx cap sync
 * [`disconnect()`](#disconnect)
 * [`newLine()`](#newline)
 * [`cut()`](#cut)
+* [`align(...)`](#align)
 * [`print(...)`](#print)
 * [`tableHeader(...)`](#tableheader)
 * [`addListener('wifiConnected', ...)`](#addlistenerwificonnected-)
@@ -64,6 +65,19 @@ newLine() => Promise<void>
 ```typescript
 cut() => Promise<void>
 ```
+
+--------------------
+
+
+### align(...)
+
+```typescript
+align(options: AlignOptions) => Promise<void>
+```
+
+| Param         | Type                                                  |
+| ------------- | ----------------------------------------------------- |
+| **`options`** | <code><a href="#alignoptions">AlignOptions</a></code> |
 
 --------------------
 
@@ -135,6 +149,13 @@ addListener(eventName: 'wifiDataWritten', listenerFunc: (result: WiFiDataWritten
 | ---------- | ------------------- |
 | **`host`** | <code>string</code> |
 | **`port`** | <code>number</code> |
+
+
+#### AlignOptions
+
+| Prop     | Type                |
+| -------- | ------------------- |
+| **`to`** | <code>string</code> |
 
 
 #### SendCommandOptions

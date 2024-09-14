@@ -48,6 +48,20 @@
     [call resolve];
 }
 
+- (void)align:(CAPPluginCall *)call {
+    NSString *to = [call getString:@"to" defaultValue:nil];
+    NSUInteger alignment = 0; // Left
+
+    if ([to isEqualToString:@"center"]) {
+        alignment = 1; // Center
+    } else if ([to isEqualToString:@"right"]) {
+        alignment = 2; // Right
+    }
+
+    NSData *commandData = [PosCommand selectAlignment:alignment];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [call resolve];
+}
 
 // Send WiFi Command
 - (void)print:(CAPPluginCall *)call {
