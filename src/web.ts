@@ -27,6 +27,10 @@ export class CapacitorMunbynWeb
     throw this.unimplemented('Not implemented on web.');
   }
 
+  async tableHeader(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
   async addListener(): Promise<PluginListenerHandle> {
     throw this.unimplemented('Not implemented on web.');
   }

@@ -5,6 +5,7 @@ export interface CapacitorMunbynPlugin {
   newLine(): Promise<void>;
   cut(): Promise<void>;
   print(options: SendCommandOptions): Promise<void>;
+  tableHeader(options: TableHeaderOptions): Promise<void>;
 
   // Event Listener Methods
   addListener(eventName: 'wifiConnected', listenerFunc: (result: WiFiConnectedResult) => void): Promise<PluginListenerHandle>;
@@ -36,4 +37,9 @@ export interface WiFiDataWrittenResult {
 // Define PluginListenerHandle interface (provided by Capacitor)
 export interface PluginListenerHandle {
   remove: () => void;
+}
+
+// Define types for sending table header
+export interface TableHeaderOptions {
+  data: Array<string>;
 }

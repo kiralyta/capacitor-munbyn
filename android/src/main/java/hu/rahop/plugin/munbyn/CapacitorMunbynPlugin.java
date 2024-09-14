@@ -40,4 +40,9 @@ public class CapacitorMunbynPlugin extends Plugin {
     public void addListener(PluginCall call) {
         call.unimplemented("Event listeners are not implemented on Android.");
     }
+
+    @PluginMethod
+    public void tableHeader(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
+    }
 }

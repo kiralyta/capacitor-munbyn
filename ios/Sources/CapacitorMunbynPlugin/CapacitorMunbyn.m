@@ -68,4 +68,51 @@
     [self notifyListeners:@"wifiDataWritten" data:@{@"tag": @(tag)}];
 }
 
-@end  // End the @implementation block
+// Send table header
+- (void)tableHeader:(CAPPluginCall *)call {
+    id data = [call.options objectForKey:@"data"];
+
+    if ([data isKindOfClass:[NSArray class]]) {
+        // Calculate the column width
+        NSArray *arrayData = (NSArray *)data;
+        NSUInteger totalWidth = 50;  // Total width for the table
+        NSUInteger numberOfColumns = [data count];
+        NSUInteger columnWidth = numberOfColumns > 0 ? totalWidth / numberOfColumns : 0;
+
+        // Print first line of table
+        NSString *text = @"----------------------------------------";
+        [[POSWIFIManager shareWifiManager] POSSendMSGWith:text];
+
+        // New line
+        // NSData *commandData = [PosCommand printAndFeedLine];
+        // [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+
+        // Table Header
+        for (NSUInteger i = 0; i < numberOfColumns; i++) {
+            NSString *texty = [arrayData objectAtIndex:i];
+            NSUInteger currentColumnLength = [texty length] - 1;
+
+            [[POSWIFIManager shareWifiManager] POSSendMSGWith:texty];
+
+            // Ensure 'y' is used as the loop variable
+            NSUInteger paddingWidth = columnWidth - currentColumnLength;
+
+            for (NSUInteger y = currentColumnLength; y < paddingWidth; y++) {
+                [[POSWIFIManager shareWifiManager] POSSendMSGWith:@" "];
+            }
+        }
+
+        // New line
+        // [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+
+        // Print end line of header
+        // [[POSWIFIManager shareWifiManager] POSSendMSGWith:text];
+
+    } else {
+        NSLog(@"Data is not an array or is nil.");
+    }
+
+    [call resolve];
+}
+
+@end
