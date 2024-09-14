@@ -1,4 +1,4 @@
-import { WebPlugin } from '@capacitor/core';
+import { PluginListenerHandle, WebPlugin } from '@capacitor/core';
 
 import type { CapacitorMunbynPlugin } from './definitions';
 
@@ -6,8 +6,28 @@ export class CapacitorMunbynWeb
   extends WebPlugin
   implements CapacitorMunbynPlugin
 {
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
+  // WiFi Methods
+  async connect(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async disconnect(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async newLine(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async cut(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async print(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async addListener(): Promise<PluginListenerHandle> {
+    throw this.unimplemented('Not implemented on web.');
   }
 }
