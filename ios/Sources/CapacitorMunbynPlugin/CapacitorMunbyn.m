@@ -72,6 +72,33 @@
     [call resolve];
 }
 
+// Set Logo
+- (void)setLogo:(CAPPluginCall *)call {
+    NSString *base64Image = [call getString:@"imageData" defaultValue:nil];
+    // Assuming you have a UIImage object named `bmpImage`
+    int bmpType = 0; // Define the BMP type as per your requirement
+    int printType = 0; // Define the print type as per your requirement
+
+    // Convert Base64 string to NSData
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64Image options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *bmpImage = [UIImage imageWithData:imageData];
+
+    NSData *defineBmpData = [PosCommand definedFlashBmpWithN:1 andBmp:bmpImage andBmpType:bmpType andPrintType:printType];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:defineBmpData];
+    [call resolve];
+}
+
+// Print logo
+- (void)printLogo:(CAPPluginCall *)call {
+    int flashPosition = 0; // The position where the image was stored, typically 0 for the first image
+    int printMode = 0; // Print mode: 0 for normal, 1 for double width, 2 for double height, 3 for double width and height
+
+    NSData *printBmpData = [PosCommand printBmpInFLASHWithN:flashPosition andM:printMode];
+
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:printBmpData];
+    [call resolve];
+}
+
 // Event when WiFi Manager connects
 - (void)POSWIFIManager:(POSWIFIManager *)manager didConnectedToHost:(NSString *)host port:(UInt16)port {
     [self notifyListeners:@"wifiConnected" data:@{@"host": host, @"port": @(port)}];

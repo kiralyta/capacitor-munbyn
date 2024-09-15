@@ -6,6 +6,8 @@ export interface CapacitorMunbynPlugin {
   cut(): Promise<void>;
   align(options: AlignOptions): Promise<void>;
   print(options: SendCommandOptions): Promise<void>;
+  setLogo(options: SetLogoOptions): Promise<void>;
+  printLogo(): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;
 
   // Event Listener Methods
@@ -27,6 +29,11 @@ export interface AlignOptions {
 export interface ConnectWiFiOptions {
   host: string;  // IP address of the WiFi printer
   port: number;  // Port number to connect to
+}
+
+// Define types for sending commands to the BLE or WiFi device
+export interface SetLogoOptions {
+  imageData: string; // base64 .bmp image
 }
 
 // Define WiFi connection success result

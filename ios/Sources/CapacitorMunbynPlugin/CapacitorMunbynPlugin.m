@@ -10,5 +10,7 @@ CAP_PLUGIN(CapacitorMunbynPlugin, "CapacitorMunbyn",
     CAP_PLUGIN_METHOD(cut, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(align, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(print, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(setLogo, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(printLogo, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(tableHeader, CAPPluginReturnPromise);
 )

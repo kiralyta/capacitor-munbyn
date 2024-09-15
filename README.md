@@ -19,6 +19,8 @@ npx cap sync
 * [`cut()`](#cut)
 * [`align(...)`](#align)
 * [`print(...)`](#print)
+* [`setLogo(...)`](#setlogo)
+* [`printLogo()`](#printlogo)
 * [`tableHeader(...)`](#tableheader)
 * [`addListener('wifiConnected', ...)`](#addlistenerwificonnected-)
 * [`addListener('wifiDataWritten', ...)`](#addlistenerwifidatawritten-)
@@ -95,6 +97,28 @@ print(options: SendCommandOptions) => Promise<void>
 --------------------
 
 
+### setLogo(...)
+
+```typescript
+setLogo(options: SetLogoOptions) => Promise<void>
+```
+
+| Param         | Type                                                      |
+| ------------- | --------------------------------------------------------- |
+| **`options`** | <code><a href="#setlogooptions">SetLogoOptions</a></code> |
+
+--------------------
+
+
+### printLogo()
+
+```typescript
+printLogo() => Promise<void>
+```
+
+--------------------
+
+
 ### tableHeader(...)
 
 ```typescript
@@ -163,6 +187,13 @@ addListener(eventName: 'wifiDataWritten', listenerFunc: (result: WiFiDataWritten
 | Prop       | Type                |
 | ---------- | ------------------- |
 | **`text`** | <code>string</code> |
+
+
+#### SetLogoOptions
+
+| Prop            | Type                |
+| --------------- | ------------------- |
+| **`imageData`** | <code>string</code> |
 
 
 #### TableHeaderOptions
