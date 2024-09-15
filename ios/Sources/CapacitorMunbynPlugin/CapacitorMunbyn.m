@@ -29,6 +29,7 @@
             [call resolve];
         } else {
             // [call reject:@"Failed to connect to WiFi printer"];
+            return;
         }
     }];
 }
@@ -133,6 +134,7 @@
     [[POSWIFIManager shareWifiManager] POSSendMSGWith:text];
     [call resolve];
 }
+
 
 // Set Logo
 - (void)setLogo:(CAPPluginCall *)call {

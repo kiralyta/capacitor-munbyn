@@ -103,7 +103,7 @@ send messages
             NSLog(@"%@", blockStr);
 
             if (commandSendMode == 0) {
-                [self.sendSocket writeData:[blockStr dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1 tag:0];
+                [self.sendSocket writeData:[blockStr dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
             } else {
                 [self.commandBuffer addObject:blockStr];
             }
