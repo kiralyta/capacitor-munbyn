@@ -23,6 +23,7 @@ npx cap sync
 * [`fontSize(...)`](#fontsize)
 * [`printLogo()`](#printlogo)
 * [`tableHeader(...)`](#tableheader)
+* [`checkConnection()`](#checkconnection)
 * [`addListener('wifiConnected', ...)`](#addlistenerwificonnected-)
 * [`addListener('wifiDataWritten', ...)`](#addlistenerwifidatawritten-)
 * [Interfaces](#interfaces)
@@ -143,6 +144,15 @@ tableHeader(options: TableHeaderOptions) => Promise<void>
 | Param         | Type                                                              |
 | ------------- | ----------------------------------------------------------------- |
 | **`options`** | <code><a href="#tableheaderoptions">TableHeaderOptions</a></code> |
+
+--------------------
+
+
+### checkConnection()
+
+```typescript
+checkConnection() => Promise<void>
+```
 
 --------------------
 

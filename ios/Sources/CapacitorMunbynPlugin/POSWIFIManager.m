@@ -77,16 +77,16 @@ static POSWIFIManager *shareManager = nil;
 /// @param data data
 /// @param block callback
 -(void)POSWriteCommandWithData:(NSData *)data withResponse:(POSWIFICallBackBlock)block{
-
-    if (_connectOK) {
-        self.callBackBlock = block;
-        if (commandSendMode==0)
-            [self.sendSocket writeData:data withTimeout:-1 tag:0];
-        else
-            [self.commandBuffer addObject: data];
-        //[_sendSocket writeData:data withTimeout:-1 tag:0];
-    }
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (_connectOK) {
+            self.callBackBlock = block;
+            if (commandSendMode==0)
+                [self.sendSocket writeData:data withTimeout:-1 tag:0];
+            else
+                [self.commandBuffer addObject: data];
+            //[_sendSocket writeData:data withTimeout:-1 tag:0];
+        }
+    });
 }
 
 /**
@@ -138,9 +138,8 @@ send messages
             self.sendSocket = [[AsyncSocket alloc] initWithDelegate:self];
         }
 
-        if ([self.sendSocket isConnected]) {
-            [self.sendSocket disconnect];
-        }
+        // Disconnect first, just in case
+        [self.sendSocket disconnect];
 
         _connectOK = NO;
         _hostStr = hostStr;
@@ -164,18 +163,6 @@ send messages
 
         // [self.sendSocket setRunLoopModes:@[NSRunLoopCommonModes]];
     });
-
-////    self.callBack = block;
-//    if (!_connectOK)
-//    {
-//        NSLog(@"%@",error);
-//        [self showAlert:@"连接失败"];
-//    }else{
-//        NSLog(@"connect success!");
-//        [self onSocket:_sendSocket didConnectToHost:hostStr port:port];
-//    }
-//
-//    [_sendSocket setRunLoopModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
 }
 
 /// Connection established
@@ -258,11 +245,13 @@ send messages
     }
     if (sock.userData == SocketOfflineByServer) {
         _isAutoDisconnect = YES;
-        // 重连
-
-        [self POSConnectWithHost:_hostStr port:_port completion:^(BOOL isConnect) {
-
-        }];
+        int delayInSeconds = 30;
+        // Delay reconnection attempt
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self POSConnectWithHost:_hostStr port:_port completion:^(BOOL isConnect) {
+                // Handle connection result if needed
+            }];
+        });
     }else if (sock.userData == SocketOfflineByUser) {
         _isAutoDisconnect = NO;
         return;

@@ -10,6 +10,7 @@ export interface CapacitorMunbynPlugin {
   fontSize(options: FontSizeOptions): Promise<void>;
   printLogo(): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;
+  checkConnection(): Promise<void>;
 
   // Event Listener Methods
   addListener(eventName: 'wifiConnected', listenerFunc: (result: WiFiConnectedResult) => void): Promise<PluginListenerHandle>;

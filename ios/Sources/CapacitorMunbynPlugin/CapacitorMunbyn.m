@@ -163,6 +163,21 @@
     [self notifyListeners:@"wifiDataWritten" data:@{@"tag": @(tag)}];
 }
 
+// Check printer status
+- (void)checkConnection:(CAPPluginCall *)call {
+    // Generate the status command
+    NSData *statusCommand = [PosCommand requestRealTimeForPrint:1];
+
+    if (statusCommand == nil) {
+        NSLog(@"Failed to generate status command");
+        // [call reject:@"Failed to generate status command"];
+        return;
+    }
+
+    // Send the command to the printer
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:statusCommand];
+}
+
 // Send table header
 - (void)tableHeader:(CAPPluginCall *)call {
     id data = [call.options objectForKey:@"data"];

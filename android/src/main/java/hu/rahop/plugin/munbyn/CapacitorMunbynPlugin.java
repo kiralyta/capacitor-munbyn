@@ -65,4 +65,9 @@ public class CapacitorMunbynPlugin extends Plugin {
     public void fontSize(PluginCall call) {
         call.unimplemented("Not implemented on Android.");
     }
+
+    @PluginMethod
+    public void checkConnection(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
+    }
 }

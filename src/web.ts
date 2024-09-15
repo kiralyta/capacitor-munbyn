@@ -50,4 +50,8 @@ export class CapacitorMunbynWeb
   async fontSize(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
   }
+
+  async checkConnection(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
 }
