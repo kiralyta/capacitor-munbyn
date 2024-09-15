@@ -64,8 +64,26 @@
 }
 
 - (void)fontSize:(CAPPluginCall *)call {
-    NSString *size = [call getNumber:@"value" defaultValue:nil];
-    NSData *command = [PosCommand selectCharacterSize:size];
+    NSNumber *size = [call getNumber:@"value" defaultValue:nil];
+
+    NSLog(@"Font size value passed: %@", size);
+
+    int finalSize = 0x00;
+    if ([size intValue] == 1) {
+        finalSize = 0x11;  // 2x width and height
+    } else if ([size intValue] == 2) {
+        finalSize = 0x22;  // 3x width and height
+    } else if ([size intValue] == 3) {
+        finalSize = 0x33;  // 4x width and height
+    } else if ([size intValue] == 4) {
+        finalSize = 0x44;  // 5x width and height
+    } else if ([size intValue] == 0) {
+        finalSize = 0x00;  // Normal size (1x width and height)
+    }
+
+    NSLog(@"Final size (hex): 0x%X", finalSize);
+
+    NSData *command = [PosCommand selectCharacterSize:finalSize];
     [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:command];
     [call resolve];
 }
@@ -82,25 +100,54 @@
 // Set Logo
 - (void)setLogo:(CAPPluginCall *)call {
     NSString *base64Image = [call getString:@"imageData" defaultValue:nil];
-    // Assuming you have a UIImage object named `bmpImage`
-    int bmpType = 0; // Define the BMP type as per your requirement
-    int printType = 0; // Define the print type as per your requirement
 
-    // Convert Base64 string to NSData
+    if (base64Image == nil) {
+        NSLog(@"Image data is required");
+        return;
+    }
+
+    // Decode Base64 string to NSData
     NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64Image options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+    if (imageData == nil) {
+        NSLog(@"Invalid base64 image data");
+        return;
+    }
+
     UIImage *bmpImage = [UIImage imageWithData:imageData];
 
+    if (bmpImage == nil) {
+        NSLog(@"Unable to create image from the provided data");
+        return;
+    }
+
+    // Based on the assumption of standard BMP type (monochrome) and print type (normal)
+    int bmpType = 0;  // Assuming 0 for monochrome or standard BMP format
+    int printType = 0;  // Assuming 0 for normal print (not double width or height))
+
+    // Store the logo in flash memory at position 1
     NSData *defineBmpData = [PosCommand definedFlashBmpWithN:1 andBmp:bmpImage andBmpType:bmpType andPrintType:printType];
+
+    if (defineBmpData == nil) {
+        NSLog(@"Failed to define BMP data");
+        return;
+    }
+
     [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:defineBmpData];
     [call resolve];
 }
 
 // Print logo
 - (void)printLogo:(CAPPluginCall *)call {
-    int flashPosition = 0; // The position where the image was stored, typically 0 for the first image
+    int flashPosition = 1; // The position where the image was stored, typically 0 for the first image
     int printMode = 0; // Print mode: 0 for normal, 1 for double width, 2 for double height, 3 for double width and height
 
     NSData *printBmpData = [PosCommand printBmpInFLASHWithN:flashPosition andM:printMode];
+
+    if (printBmpData == nil) {
+        NSLog(@"Failed to generate print command");
+        return;
+    }
 
     [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:printBmpData];
     [call resolve];

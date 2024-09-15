@@ -26,6 +26,7 @@ npx cap sync
 * [`addListener('wifiConnected', ...)`](#addlistenerwificonnected-)
 * [`addListener('wifiDataWritten', ...)`](#addlistenerwifidatawritten-)
 * [Interfaces](#interfaces)
+* [Enums](#enums)
 
 </docgen-index>
 
@@ -212,9 +213,9 @@ addListener(eventName: 'wifiDataWritten', listenerFunc: (result: WiFiDataWritten
 
 #### FontSizeOptions
 
-| Prop        | Type                |
-| ----------- | ------------------- |
-| **`value`** | <code>number</code> |
+| Prop        | Type                                          |
+| ----------- | --------------------------------------------- |
+| **`value`** | <code><a href="#fontsize">FontSize</a></code> |
 
 
 #### TableHeaderOptions
@@ -295,5 +296,19 @@ addListener(eventName: 'wifiDataWritten', listenerFunc: (result: WiFiDataWritten
 | Prop      | Type                |
 | --------- | ------------------- |
 | **`tag`** | <code>number</code> |
+
+
+### Enums
+
+
+#### FontSize
+
+| Members         | Value          |
+| --------------- | -------------- |
+| **`Normal`**    | <code>0</code> |
+| **`Double`**    | <code>1</code> |
+| **`Triple`**    | <code>2</code> |
+| **`Quadruple`** | <code>3</code> |
+| **`Quintuple`** | <code>4</code> |
 
 </docgen-api>

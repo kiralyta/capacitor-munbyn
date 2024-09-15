@@ -59,5 +59,13 @@ export interface TableHeaderOptions {
 }
 
 export interface FontSizeOptions {
-  value: number;
+  value: FontSize;
+}
+
+export enum FontSize {
+  Normal = 0,
+  Double = 1,
+  Triple = 2,
+  Quadruple = 3,
+  Quintuple = 4
 }
