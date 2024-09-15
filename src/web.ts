@@ -46,4 +46,8 @@ export class CapacitorMunbynWeb
   async addListener(): Promise<PluginListenerHandle> {
     throw this.unimplemented('Not implemented on web.');
   }
+
+  async fontSize(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
 }

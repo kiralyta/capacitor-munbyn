@@ -63,6 +63,13 @@
     [call resolve];
 }
 
+- (void)fontSize:(CAPPluginCall *)call {
+    NSString *size = [call getNumber:@"value" defaultValue:nil];
+    NSData *command = [PosCommand selectCharacterSize:size];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:command];
+    [call resolve];
+}
+
 // Send WiFi Command
 - (void)print:(CAPPluginCall *)call {
     NSString *text = [call getString:@"text" defaultValue:nil];

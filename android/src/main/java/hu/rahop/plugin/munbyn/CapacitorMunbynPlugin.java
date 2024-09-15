@@ -60,4 +60,9 @@ public class CapacitorMunbynPlugin extends Plugin {
     public void printLogo(PluginCall call) {
         call.unimplemented("Not implemented on Android.");
     }
+
+    @PluginMethod
+    public void fontSize(PluginCall call) {
+        call.unimplemented("Not implemented on Android.");
+    }
 }

@@ -7,6 +7,7 @@ export interface CapacitorMunbynPlugin {
   align(options: AlignOptions): Promise<void>;
   print(options: SendCommandOptions): Promise<void>;
   setLogo(options: SetLogoOptions): Promise<void>;
+  fontSize(options: FontSizeOptions): Promise<void>;
   printLogo(): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;
 
@@ -55,4 +56,8 @@ export interface PluginListenerHandle {
 // Define types for sending table header
 export interface TableHeaderOptions {
   data: Array<string>;
+}
+
+export interface FontSizeOptions {
+  value: number;
 }
