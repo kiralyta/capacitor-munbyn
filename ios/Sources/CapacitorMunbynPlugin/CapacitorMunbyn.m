@@ -12,6 +12,12 @@
 
 @implementation CapacitorMunbynPlugin  // Start the @implementation block
 
+- (void)load {
+    [super load];
+    self.isBold = NO; // Start with bold mode off
+    self.isUnderlined = NO; // Start with underline mode off
+}
+
 // WiFi Connection Method
 - (void)connect:(CAPPluginCall *)call {
     NSString *host = [call getString:@"host" defaultValue:nil];
@@ -47,6 +53,37 @@
     [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
     [call resolve];
 }
+
+- (void)toggleBold:(CAPPluginCall *)call {
+    NSData *commandData;
+    if (self.isBold) {
+        // Disable bold mode (set to 0 or 49 depending on your printer's requirements)
+        commandData = [PosCommand selectOrCancleBoldModel:48];
+    } else {
+        // Enable bold mode (set to 1 or 48 depending on your printer's requirements)
+        commandData = [PosCommand selectOrCancleBoldModel:49];
+    }
+
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    self.isBold = !self.isBold; // Toggle the state
+    [call resolve];
+}
+
+- (void)toggleUnderline:(CAPPluginCall *)call {
+    NSData *commandData;
+    if (self.isUnderlined) {
+        // Disable underline mode
+        commandData = [PosCommand selectOrCancleUnderLineModel:48]; // Replace 48 with the command to disable underline
+    } else {
+        // Enable underline mode
+        commandData = [PosCommand selectOrCancleUnderLineModel:49]; // Replace 49 with the command to enable underline
+    }
+
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    self.isUnderlined = !self.isUnderlined; // Toggle the state
+    [call resolve];
+}
+
 
 - (void)align:(CAPPluginCall *)call {
     NSString *to = [call getString:@"to" defaultValue:nil];

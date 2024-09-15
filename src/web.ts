@@ -54,4 +54,12 @@ export class CapacitorMunbynWeb
   async checkConnection(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
   }
+
+  async toggleBold(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async toggleUnderline(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
 }

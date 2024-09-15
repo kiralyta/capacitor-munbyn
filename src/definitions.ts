@@ -7,6 +7,8 @@ export interface CapacitorMunbynPlugin {
   align(options: AlignOptions): Promise<void>;
   print(options: SendCommandOptions): Promise<void>;
   setLogo(options: SetLogoOptions): Promise<void>;
+  toggleBold(): Promise<void>;
+  toggleUnderline(): Promise<void>;
   fontSize(options: FontSizeOptions): Promise<void>;
   printLogo(): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;

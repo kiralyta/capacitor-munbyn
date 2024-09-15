@@ -20,6 +20,8 @@ npx cap sync
 * [`align(...)`](#align)
 * [`print(...)`](#print)
 * [`setLogo(...)`](#setlogo)
+* [`toggleBold()`](#togglebold)
+* [`toggleUnderline()`](#toggleunderline)
 * [`fontSize(...)`](#fontsize)
 * [`printLogo()`](#printlogo)
 * [`tableHeader(...)`](#tableheader)
@@ -109,6 +111,24 @@ setLogo(options: SetLogoOptions) => Promise<void>
 | Param         | Type                                                      |
 | ------------- | --------------------------------------------------------- |
 | **`options`** | <code><a href="#setlogooptions">SetLogoOptions</a></code> |
+
+--------------------
+
+
+### toggleBold()
+
+```typescript
+toggleBold() => Promise<void>
+```
+
+--------------------
+
+
+### toggleUnderline()
+
+```typescript
+toggleUnderline() => Promise<void>
+```
 
 --------------------
 
