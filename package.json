@@ -1,6 +1,6 @@
 {
   "name": "capacitor-munbyn",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Capacitor.js bridge to Munbyn ITPP047 pos thermal printer.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

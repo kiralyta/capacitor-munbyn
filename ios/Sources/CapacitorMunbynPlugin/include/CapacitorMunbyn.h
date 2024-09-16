@@ -7,7 +7,7 @@
 
 @property (nonatomic, assign) BOOL isBold;
 @property (nonatomic, assign) BOOL isUnderlined;
-@property (nonatomic, assign) POSWIFIManager wifiManager;
+@property (nonatomic, assign) POSWIFIManager* wifiManager;
 
 // Declare methods that will be called from the JS side
 - (void)connect:(CAPPluginCall *)call;
