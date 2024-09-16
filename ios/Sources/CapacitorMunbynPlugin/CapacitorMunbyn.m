@@ -16,6 +16,7 @@
     [super load];
     self.isBold = NO; // Start with bold mode off
     self.isUnderlined = NO; // Start with underline mode off
+    self.wifiManager = [POSWIFIManager shareWifiManager];
 }
 
 // WiFi Connection Method
@@ -23,8 +24,7 @@
     NSString *host = [call getString:@"host" defaultValue:nil];
     NSNumber *port = [call getNumber:@"port" defaultValue:nil];
 
-    POSWIFIManager *wifiManager = [POSWIFIManager shareWifiManager];
-    [wifiManager POSConnectWithHost:host port:port completion:^(BOOL success) {
+    [self.wifiManager POSConnectWithHost:host port:port completion:^(BOOL success) {
         if (success) {
             [call resolve];
         } else {
@@ -36,7 +36,7 @@
 
 // Disconnect WiFi Device
 - (void)disconnect:(CAPPluginCall *)call {
-    [[POSWIFIManager shareWifiManager] POSDisConnect];
+    [self.wifiManager POSDisConnect];
     [call resolve];
 }
 
@@ -44,20 +44,20 @@
 - (void)newLine:(CAPPluginCall *)call {
     NSData *commandData = [PosCommand printAndFeedLine];
 
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [self.wifiManager POSWriteCommandWithData:commandData];
     [call resolve];
 }
 
 - (void)cut:(CAPPluginCall *)call {
     NSData *newLineCommand = [PosCommand printAndFeedLine];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
+    [self.wifiManager POSWriteCommandWithData:newLineCommand];
+    [self.wifiManager POSWriteCommandWithData:newLineCommand];
+    [self.wifiManager POSWriteCommandWithData:newLineCommand];
+    [self.wifiManager POSWriteCommandWithData:newLineCommand];
+    [self.wifiManager POSWriteCommandWithData:newLineCommand];
 
     NSData *commandData = [PosCommand selectCutPageModelAndCutpage:48];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [self.wifiManager POSWriteCommandWithData:commandData];
     [call resolve];
 }
 
@@ -71,7 +71,7 @@
         commandData = [PosCommand selectOrCancleBoldModel:49];
     }
 
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [self.wifiManager POSWriteCommandWithData:commandData];
     self.isBold = !self.isBold; // Toggle the state
     [call resolve];
 }
@@ -86,7 +86,7 @@
         commandData = [PosCommand selectOrCancleUnderLineModel:49]; // Replace 49 with the command to enable underline
     }
 
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [self.wifiManager POSWriteCommandWithData:commandData];
     self.isUnderlined = !self.isUnderlined; // Toggle the state
     [call resolve];
 }
@@ -103,7 +103,7 @@
     }
 
     NSData *commandData = [PosCommand selectAlignment:alignment];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+    [self.wifiManager POSWriteCommandWithData:commandData];
     [call resolve];
 }
 
@@ -128,7 +128,7 @@
     NSLog(@"Final size (hex): 0x%X", finalSize);
 
     NSData *command = [PosCommand selectCharacterSize:finalSize];
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:command];
+    [self.wifiManager POSWriteCommandWithData:command];
     [call resolve];
 }
 
@@ -137,7 +137,7 @@
     NSString *text = [call getString:@"text" defaultValue:nil];
     NSData *textData = [text dataUsingEncoding:NSUTF8StringEncoding];
 
-    [[POSWIFIManager shareWifiManager] POSSendMSGWith:text];
+    [self.wifiManager POSSendMSGWith:text];
     [call resolve];
 }
 
@@ -178,7 +178,7 @@
         return;
     }
 
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:defineBmpData];
+    [self.wifiManager POSWriteCommandWithData:defineBmpData];
     [call resolve];
 }
 
@@ -194,7 +194,7 @@
         return;
     }
 
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:printBmpData];
+    [self.wifiManager POSWriteCommandWithData:printBmpData];
     [call resolve];
 }
 
@@ -220,7 +220,7 @@
     }
 
     // Send the command to the printer
-    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:statusCommand];
+    [self.wifiManager POSWriteCommandWithData:statusCommand];
 }
 
 // Send table header
@@ -236,24 +236,24 @@
 
         // Print first line of table
         NSString *text = @"----------------------------------------";
-        [[POSWIFIManager shareWifiManager] POSSendMSGWith:text];
+        [self.wifiManager POSSendMSGWith:text];
 
         // New line
         // NSData *commandData = [PosCommand printAndFeedLine];
-        // [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
+        // [self.wifiManager POSWriteCommandWithData:commandData];
 
         // Table Header
         for (NSUInteger i = 0; i < numberOfColumns; i++) {
             NSString *texty = [arrayData objectAtIndex:i];
             NSUInteger currentColumnLength = [texty length] - 1;
 
-            [[POSWIFIManager shareWifiManager] POSSendMSGWith:texty];
+            [self.wifiManager POSSendMSGWith:texty];
 
             // Ensure 'y' is used as the loop variable
             NSUInteger paddingWidth = columnWidth - currentColumnLength;
 
             for (NSUInteger y = currentColumnLength; y < paddingWidth; y++) {
-                [[POSWIFIManager shareWifiManager] POSSendMSGWith:@" "];
+                [self.wifiManager POSSendMSGWith:@" "];
             }
         }
 
