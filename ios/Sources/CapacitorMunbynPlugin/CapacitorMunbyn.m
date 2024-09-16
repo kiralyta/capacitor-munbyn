@@ -49,8 +49,14 @@
 }
 
 - (void)cut:(CAPPluginCall *)call {
-    NSData *commandData = [PosCommand selectCutPageModelAndCutpage:48];
+    NSData *newLineCommand = [PosCommand printAndFeedLine];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
+    [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:newLineCommand];
 
+    NSData *commandData = [PosCommand selectCutPageModelAndCutpage:48];
     [[POSWIFIManager shareWifiManager] POSWriteCommandWithData:commandData];
     [call resolve];
 }
