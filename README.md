@@ -24,6 +24,7 @@ npx cap sync
 * [`toggleUnderline()`](#toggleunderline)
 * [`fontSize(...)`](#fontsize)
 * [`printLogo()`](#printlogo)
+* [`printQRCode(...)`](#printqrcode)
 * [`tableHeader(...)`](#tableheader)
 * [`checkConnection()`](#checkconnection)
 * [`addListener('wifiConnected', ...)`](#addlistenerwificonnected-)
@@ -155,6 +156,19 @@ printLogo() => Promise<void>
 --------------------
 
 
+### printQRCode(...)
+
+```typescript
+printQRCode(options: QRCodeOptions) => Promise<void>
+```
+
+| Param         | Type                                                    |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | <code><a href="#qrcodeoptions">QRCodeOptions</a></code> |
+
+--------------------
+
+
 ### tableHeader(...)
 
 ```typescript
@@ -246,6 +260,15 @@ addListener(eventName: 'wifiDataWritten', listenerFunc: (result: WiFiDataWritten
 | Prop        | Type                                          |
 | ----------- | --------------------------------------------- |
 | **`value`** | <code><a href="#fontsize">FontSize</a></code> |
+
+
+#### QRCodeOptions
+
+| Prop                  | Type                |
+| --------------------- | ------------------- |
+| **`text`**            | <code>string</code> |
+| **`size`**            | <code>number</code> |
+| **`errorCorrection`** | <code>number</code> |
 
 
 #### TableHeaderOptions
