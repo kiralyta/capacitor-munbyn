@@ -1020,39 +1020,25 @@
                    andModuleSize:(int)moduleSize
               andErrorCorrection:(int)errorCorrection
 {
+    // Clamp module size and error correction to supported ranges
+    if (moduleSize < 1) moduleSize = 1;
+    if (moduleSize > 8) moduleSize = 8; // Munbyn supports 1–8
+    if (errorCorrection < 0) errorCorrection = 0;
+    if (errorCorrection > 3) errorCorrection = 3; // 0=L,1=M,2=Q,3=H
+
     NSMutableData *data = [NSMutableData data];
 
-    // 1. Set model (Model 2)
-    Byte modelCmd[] = {0x1D, 0x28, 0x6B, 0x04, 0x00, 0x31, 0x41, 0x32};
-    [data appendBytes:modelCmd length:sizeof(modelCmd)];
+    // 1. Set QR code module size
+    [data appendData:[PosCommand setQRcodeUnitsize:moduleSize]];
 
-    // 2. Set module size (1–16)
-    // -> length bytes: 0x03 0x00
-    if (moduleSize < 1) moduleSize = 1;
-    if (moduleSize > 16) moduleSize = 16;
-    Byte sizeCmd[] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x43, (Byte)moduleSize};
-    [data appendBytes:sizeCmd length:sizeof(sizeCmd)];
+    // 2. Set error correction level
+    [data appendData:[PosCommand setErrorCorrectionLevelForQrcode:errorCorrection]];
 
-    // 3. Set error correction level (0–3 → L,M,Q,H)
-    // 0=L, 1=M, 2=Q, 3=H
-    if (errorCorrection < 0) errorCorrection = 0;
-    if (errorCorrection > 3) errorCorrection = 3;
-    Byte ecc = (Byte)(48 + errorCorrection);
-    Byte eccCmd[] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, ecc};
-    [data appendBytes:eccCmd length:sizeof(eccCmd)];
+    // 3. Store QR code data
+    [data appendData:[PosCommand sendDataToStoreAreaWitQrcodeConent:content usEnCoding:NSUTF8StringEncoding]];
 
-    // 4. Store data
-    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
-    UInt16 len = (UInt16)(contentData.length + 3);
-    Byte pL = len & 0xFF;
-    Byte pH = (len >> 8) & 0xFF;
-    Byte storeCmd[] = {0x1D, 0x28, 0x6B, pL, pH, 0x31, 0x50, 0x30};
-    [data appendBytes:storeCmd length:sizeof(storeCmd)];
-    [data appendData:contentData];
-
-    // 5. Print QR code
-    Byte printCmd[] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x51, 0x30};
-    [data appendBytes:printCmd length:sizeof(printCmd)];
+    // 4. Print the QR code
+    [data appendData:[PosCommand printTheQRcodeInStore]];
 
     return data;
 }
