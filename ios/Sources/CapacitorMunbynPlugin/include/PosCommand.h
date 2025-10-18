@@ -187,7 +187,7 @@
  选择页模式
  ESC L
  1B 4C
- 
+
  */
 +(NSData *) selectPagemodel;
 /**
@@ -402,7 +402,7 @@
  1D 56 m n
  @param m m=66.
  @param n 进纸n，然后半切纸。
- 
+
  */
 +(NSData *) selectCutPageModelAndCutpageWithM:(int) m andN:(int) n;
 /**
@@ -440,7 +440,7 @@
  GS f n
  1D 66 n
  @param n 0 or 48 代表标准；1 or 49 代表压缩字体。
- 
+
  */
 +(NSData *) selectHRIFont:(int) n;
 /**
@@ -456,7 +456,7 @@
  1D 6B m d1...dk 00
  @param m 条码类型，0~6.
  @param content 条码内容。
- 
+
  */
 +(NSData *) printBarcodeWithM:(int) m andContent:(NSString *) content useEnCodeing:(NSStringEncoding) strEncoding;
 
@@ -481,7 +481,7 @@
  (PrintRasterType) m:打印模式。
  (UIImage *) image:图片对象。
  (BmpType) type:图片处理采用的方式，二值法或者抖动算法处理。
- 
+
  */
 +(NSData *) printRasteBmpWithM:(PrintRasterType) m andImage:(UIImage *) image andType:(BmpType) type;
 /**
@@ -595,7 +595,7 @@
 /**
  Set the number of columns in the data region
  1D 28 6B 03 00 30 41 n
- 
+
  */
 
 +(NSData *) setPdf417Columns:(int) n;
@@ -603,7 +603,7 @@
 /**
  set the width of the moudule
  1D 28 6B 03 00 30 43 n
- 
+
  */
 
 +(NSData *) setpdf417WidthOfModule:(int) n;
@@ -611,7 +611,7 @@
 /**
  set the row height
  1D 28 6B 03 00 30 44 n
- 
+
  */
 
 +(NSData *) setpdf417RowHeight:(int) n;
@@ -619,15 +619,20 @@
 /**
  store the data in the symbol storage area
  1D 28 68 F9 00 30 50 30 d1...dk
- 
+
  */
 +(NSData *) storethepdf417WithpL:(int) pL andpH:(int) pH andContent:(NSString*) content usEnCoding:(NSStringEncoding) strEnCoding;
 
 /**
  print the pdf417 symbol data in the symbol storage area
  1D 28 6B 03 00 30 51 n
- 
+
  */
 
 +(NSData *) printPdf417InStore;
+
++(NSData *)printQRCodeWithContent:(NSString *)content
+                   andModuleSize:(int)moduleSize
+              andErrorCorrection:(int)errorCorrection;
+
 @end

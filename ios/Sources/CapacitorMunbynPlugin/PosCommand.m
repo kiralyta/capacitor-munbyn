@@ -13,7 +13,7 @@
 +(NSData *)horizontalPosition{
     Byte b[1]={0};
     b[0]=0x09;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:1];
     return data;
 }
@@ -29,47 +29,47 @@
     b[0]=0x0C;
     NSData *data=[NSData dataWithBytes:&b length:1];
     return data;
-    
+
 }
 +(NSData *)printAndTabs{
     Byte b[1]={0};
     b[0]=0x0D;
     NSData *data=[NSData dataWithBytes:&b length:1];
     return data;
-    
+
 }
 +(NSData *)canclePrintDataByPageModel{
     Byte b[1]={0};
     b[0]=0x18;
     NSData *data=[NSData dataWithBytes:&b length:1];
     return data;
-    
+
 }
 +(NSData *)sendRealTimeStatus:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x10;
     b[1]=0x04;
     b[2]=n;
     NSData *data=[NSData dataWithBytes:&b length:3];
     return data;
-    
+
 }
 +(NSData *)requestRealTimeForPrint:(int)n{
-    
-    
+
+
     Byte b[3]={0};
     b[0]=0x10;
     b[1]=0x05;
     b[2]=(Byte)n;
     NSData *data=[NSData dataWithBytes:&b length:3];
     return data;
-    
-    
+
+
 }
 +(NSData *)openCashBoxRealTimeWithM:(int)m andT:(int)t{
-    
-    
+
+
     Byte b[5]={0};
     b[0]=0x10;
     b[1]=0x14;
@@ -78,10 +78,10 @@
     b[4]=(Byte) t;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
-    
+
 }
 +(NSData *)printUnderPageModel{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x0C;
@@ -89,48 +89,48 @@
     return data;
 }
 +(NSData *)setCharRightSpace:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x20;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 +(NSData *)selectPrintModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x21;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 +(NSData *)setAbsolutePrintPositionWithNL:(int)nL andNH:(int)nH{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x24;
     b[2]=nL;
     b[3]=nH;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 +(NSData *)selectOrCancleCustomChar:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x25;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 +(NSData *)defineUserDefinedCharactersWithM:(int)m andNL:(int)nL andNH:(int)nH andBytes:(Byte *)bytes{
-    
+
     Byte b[5]={0};
     b[0]=0x1B;
     b[1]=0x26;
@@ -147,54 +147,54 @@
                          andnL:(int)nL
                          andnH:(int)nH
                      andNSData:(NSData *)data{
-    
+
     Byte b[5]={0};
     b[0]=0x1B;
     b[1]=0x2A;
     b[2]=m;
     b[3]=nL;
     b[4]=nH;
-    
+
     NSData *newData=[NSData dataWithBytes:&b length: sizeof(b)];
     NSMutableData *dataM=[[NSMutableData alloc]initWithData:newData];
     [dataM appendData:data];
     return dataM;
 }
 +(NSData *)selectOrCancleUnderLineModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x2D;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)setDefultLineSpace{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x32;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
-    
+
 }
 
 +(NSData *)setDefultLineSpace:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x33;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectPrinter:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x3D;
@@ -204,7 +204,7 @@
 }
 
 +(NSData *)cancleUserDefinedCharacters:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x3F;
@@ -214,17 +214,17 @@
 }
 
 +(NSData *)initializePrinter{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x40;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)setHorizontalTabsPosition:(NSData *)data{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x44;
@@ -238,50 +238,50 @@
 }
 
 +(NSData *)selectOrCancleBoldModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x45;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectOrCancleDoublePrintModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x47;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)printAdnFeed:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x4A;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectPagemodel{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x4C;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectFont:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x4D;
@@ -291,44 +291,44 @@
 }
 
 +(NSData *)selectInternationCharacterSets:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x52;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectStabdardModel{
-    
+
     Byte b[2]={0};
     b[0]=0x1B;
     b[1]=0x53;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectPrintDirectionUnderPageModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x54;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectOrCancleCW90:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x56;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
@@ -341,7 +341,7 @@
                                      anddxH:(int)dxH
                                      anddyL:(int)dyL
                                      anddyK:(int)dyH{
-    
+
     Byte b[10]={0};
     b[0]=0x1B;
     b[1]=0x57;
@@ -359,31 +359,31 @@
 
 +(NSData *)setRelativeHorizontalPrintPositionWithnL:(int)nL
                                               andnH:(int)nH{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x5C;
     b[2]=nL;
     b[3]=nH;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectAlignment:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x61;
-    
+
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectPrintTransducerOutPutPageOutSignal:(int)n{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x63;
@@ -394,7 +394,7 @@
 }
 
 +(NSData *)selectPrintTransducerStopPrint:(int)n{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x63;
@@ -402,11 +402,11 @@
     b[3]=n;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
-    
+
 }
 
 +(NSData *)allowOrForbidPressButton:(int)n{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x63;
@@ -417,11 +417,11 @@
 }
 
 +(NSData *)printAndFeedForwardWhitN:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x64;
-    
+
     b[2]=n;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
@@ -430,7 +430,7 @@
 +(NSData *)creatCashBoxContorPulseWithM:(int)m
                                   andT1:(int)t1
                                   andT2:(int)t2{
-    
+
     Byte b[5]={0};
     b[0]=0x1B;
     b[1]=0x70;
@@ -442,29 +442,29 @@
 }
 
 +(NSData *)selectCharacterCodePage:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x74;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectOrCancleConvertPrintModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1B;
     b[1]=0x7B;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)printBmpInFLASHWithN:(int)n andM:(int)m{
-    
+
     Byte b[4]={0};
     b[0]=0x1C;
     b[1]=0x70;
@@ -475,12 +475,12 @@
 }
 
 +(NSData *)definedFlashBmpWithN:(int)n andBmp:(UIImage *)image andBmpType:(BmpType) bmptype andPrintType:(PrintRasterType) type{
-    
+
     Byte b[3]={0};
     b[0]=0x1C;
     b[1]=0x71;
     b[2]=n;
-    
+
     NSData *newData=[NSData dataWithBytes:&b length: sizeof(b)];
     NSMutableData *dataM=[[NSMutableData alloc]initWithData:newData];
     NSData *data=[ImageTranster rasterImagedata:image andType:bmptype andPrintRasterType:type];
@@ -489,18 +489,18 @@
 }
 
 +(NSData *)selectCharacterSize:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x21;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)setAbsolutePositionUnderPageModelWithnL:(int)nL andnH:(int)nH{
-    
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x24;
@@ -511,11 +511,11 @@
 }
 
 +(NSData *)definedDownLoadBmp:(UIImage *)image byType:(BmpType) bmptype{
-    
+
     Byte b[2]={0};
     b[0]=0x1D;
     b[1]=0x2A;
-    
+
     NSData *newData=[NSData dataWithBytes:&b length: sizeof(b)];
     NSMutableData *dataM=[[NSMutableData alloc] initWithData:newData];
     //此处还需传入一个枚举参数，单色处理类型
@@ -539,51 +539,51 @@
 }
 
 +(NSData *)printDownLoadBmp:(int)m{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x2F;
     b[2]=m;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)startOrStopMacrodeFinition{
-    
+
     Byte b[2]={0};
     b[0]=0x1D;
     b[1]=0x3A;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectOrCancleInvertPrintModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x48;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
-    
+
 }
 
 +(NSData *)selectHRICharactersPrintPosition:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1d;
     b[1]=0x48;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)setLeftSpaceWithnL:(int)nL andnH:(int)nH{
-    
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x4C;
@@ -594,7 +594,7 @@
 }
 
 +(NSData *)setHorizontalAndVerticalMoveUnitWithX:(int)x andY:(int)y{
-    
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x50;
@@ -605,20 +605,20 @@
 }
 
 +(NSData *)selectCutPageModelAndCutpage:(int)m{
-    
-    
+
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x56;
     b[2]=m;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectCutPageModelAndCutpageWithM:(int)m andN:(int)n{
-    
-    
+
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x56;
@@ -629,7 +629,7 @@
 }
 
 +(NSData *)setPrintAreaWidthWithnL:(int)nL andnH:(int)nH{
-    
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x57;
@@ -647,13 +647,13 @@
     b[2]=nL;
     b[3]=nH;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
-    
+
+
     return data;
 }
 
 +(NSData *)executeMacrodeCommandWithR:(int)r andT:(int)t andM:(int)m{
-    
+
     Byte b[5]={0};
     b[0]=0x1D;
     b[1]=0x5E;
@@ -665,45 +665,45 @@
 }
 
 +(NSData *)openOrCloseAutoReturnPrintState:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x61;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)selectHRIFont:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x66;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 
 +(NSData *)setBarcodeHeight:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x68;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
     return data;
 }
 +(NSData *)printBarcodeWithM:(int)m andContent:(NSString *)content useEnCodeing:(NSStringEncoding)strEncoding{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x6B;
     b[2]=m;
-    
-    
+
+
     NSMutableData *dataM=[NSMutableData dataWithBytes:&b length:sizeof(b)];
     NSData *data=[content dataUsingEncoding:strEncoding];
     [dataM appendData:data];
@@ -713,34 +713,34 @@
 }
 
 +(NSData *)printBarcodeWithM:(int)m andN:(int)n andContent:(NSString *)content useEnCodeing:(NSStringEncoding) strEnCoding{
-    
+
     Byte b[4]={0};
     b[0]=0x1D;
     b[1]=0x6B;
     b[2]=m;
     b[3]=n;
-    
+
     NSMutableData *dataM=[NSMutableData dataWithBytes:&b length:sizeof(b)];
     NSData *data=[content dataUsingEncoding:strEnCoding];
     [dataM appendData:data];
-    
+
     return dataM;
 }
 
 +(NSData *)returnState:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1D;
     b[1]=0x72;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)printRasteBmpWithM:(PrintRasterType) m andImage:(UIImage *)image andType:(BmpType)type{
-    
+
     NSData *data=[ImageTranster rasterImagedata:image andType:type andPrintRasterType:m];
     return data;
 }
@@ -750,63 +750,63 @@
     b[0]=0x1D;
     b[1]=0x77;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
-    
+
+
     return data;
 }
 
 +(NSData *)setChineseCharacterModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1C;
     b[1]=0x21;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)selectChineseCharacterModel{
-    
+
     Byte b[2]={0};
     b[0]=0x1C;
     b[1]=0x26;
-    
-    
+
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)selectOrCancelChineseCharUnderLineModel:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1C;
     b[1]=0x2D;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)CancelChineseCharModel{
-    
+
     Byte b[2]={0};
     b[0]=0x1C;
     b[1]=0x2E;
-    
-    
+
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)definedUserDefinedChineseCharWithCPosition:(int)c2 andNsdata:(Byte *)bytes{
-    
+
     Byte b[4]={0};
     b[0]=0x1C;
     b[1]=0x32;
@@ -814,64 +814,64 @@
     b[3]=c2;
     NSMutableData *dataM=[NSMutableData dataWithBytes:&b length:sizeof(b)];
     [dataM appendBytes:&bytes length:sizeof(bytes)];
-    
-    
+
+
     return dataM;
 }
 
 +(NSData *)setChineseCharLeftAndRightSpaceWithN1:(int)n1 andN2:(int)n2{
-    
+
     Byte b[4]={0};
     b[0]=0x1C;
     b[1]=0x53;
     b[2]=n1;
     b[3]=n2;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
-    
+
 }
 +(NSData *)selectOrCancelChineseCharDoubleWH:(int)n{
-    
+
     Byte b[3]={0};
     b[0]=0x1C;
     b[1]=0x57;
     b[2]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
-    
+
+
     return data;
 }
 
 +(NSData *)printerOrderBuzzingHintWithRes:(int)n andTime:(int)t{
-    
+
     Byte b[4]={0};
     b[0]=0x1B;
     b[1]=0x42;
     b[2]=n;
     b[3]=t;
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)printerOrderBuzzingAndWaringLightWithM:(int)m andT:(int)t andN:(int)n{
-    
+
     Byte b[5]={0};
     b[0]=0x1B;
     b[1]=0x43;
     b[2]=m;
     b[3]=t;
     b[4]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)setQRcodeUnitsize:(int)n{
-    
+
     Byte b[6]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -879,14 +879,14 @@
     b[3]=0x30;
     b[4]=0x67;
     b[5]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
 }
 
 +(NSData *)setErrorCorrectionLevelForQrcode:(int)n{
-    
+
     Byte b[6]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -894,15 +894,15 @@
     b[3]=0x30;
     b[4]=0x69;
     b[5]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length: sizeof(b)];
-    
+
     return data;
-    
+
 }
 
 +(NSData *)sendDataToStoreAreaWitQrcodeConent:(NSString *)str usEnCoding:(NSStringEncoding) strEnCoding{
-    
+
     NSData *data=[str dataUsingEncoding:strEnCoding];
     NSInteger len=data.length;
     int x=len%256;
@@ -916,7 +916,7 @@
     b[5]=x;
     b[6]=y;
     NSMutableData *dataM=[NSMutableData dataWithBytes:&b length:sizeof(b)];
-    
+
     //NSData *data=[str dataUsingEncoding:strEnCoding];
     [dataM appendData:data];
     return dataM;
@@ -929,12 +929,12 @@
     b[2]=0x6B;
     b[3]=0x30;
     b[4]=0x81;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
     return data;
 }
 +(NSData *)setPdf417Columns:(int)n{
-    
+
     Byte b[8]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -944,13 +944,13 @@
     b[5]=0x30;
     b[6]=0x41;
     b[7]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
     return data;
 }
 
 +(NSData *)setpdf417WidthOfModule:(int)n{
-    
+
     Byte b[8]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -960,13 +960,13 @@
     b[5]=0x30;
     b[6]=0x43;
     b[7]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
     return data;
 }
 
 +(NSData *)setpdf417RowHeight:(int)n{
-    
+
     Byte b[8]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -976,13 +976,13 @@
     b[5]=0x30;
     b[6]=0x44;
     b[7]=n;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
     return data;
 }
 
 +(NSData *)storethepdf417WithpL:(int)pL andpH:(int)pH andContent:(NSString *)content usEnCoding:(NSStringEncoding) strEnCoding{
-    
+
     Byte b[8]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -992,7 +992,7 @@
     b[5]=0x30;
     b[6]=0x50;
     b[7]=0x30;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
     NSMutableData *dataM=[NSMutableData dataWithData:data];
     NSData *contentdata=[content dataUsingEncoding:strEnCoding];
@@ -1001,7 +1001,7 @@
 }
 
 +(NSData *)printPdf417InStore{
-    
+
     Byte b[8]={0};
     b[0]=0x1D;
     b[1]=0x28;
@@ -1011,8 +1011,40 @@
     b[5]=0x30;
     b[6]=0x51;
     b[7]=0x30;
-    
+
     NSData *data=[NSData dataWithBytes:&b length:sizeof(b)];
+    return data;
+}
+
++(NSData *)printQRCodeWithContent:(NSString *)content andModuleSize:(int)moduleSize andErrorCorrection:(int)errorCorrection
+{
+    // ESC/POS QR Code command structure:
+    // 1. Set model
+    Byte modelCmd[8] = {0x1D, 0x28, 0x6B, 0x04, 0x00, 0x31, 0x41, 0x32}; // Model 2
+    NSMutableData *data = [NSMutableData dataWithBytes:&modelCmd length:8];
+
+    // 2. Set module size (1–16)
+    Byte sizeCmd[8] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x43, (Byte)moduleSize};
+    [data appendBytes:&sizeCmd length:8];
+
+    // 3. Set error correction level
+    // 48='L', 49='M', 50='Q', 51='H'
+    Byte ecc = (Byte)(48 + errorCorrection);
+    Byte eccCmd[8] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, ecc};
+    [data appendBytes:&eccCmd length:8];
+
+    // 4. Store data in symbol storage area
+    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];
+    UInt16 pL = (UInt16)(contentData.length + 3) & 0xFF;
+    UInt16 pH = (UInt16)((contentData.length + 3) >> 8);
+    Byte storeCmd[8] = {0x1D, 0x28, 0x6B, (Byte)pL, (Byte)pH, 0x31, 0x50, 0x30};
+    [data appendBytes:&storeCmd length:8];
+    [data appendData:contentData];
+
+    // 5. Print the QR code
+    Byte printCmd[8] = {0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x51, 0x30};
+    [data appendBytes:&printCmd length:8];
+
     return data;
 }
 

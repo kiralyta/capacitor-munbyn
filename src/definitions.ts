@@ -11,6 +11,7 @@ export interface CapacitorMunbynPlugin {
   toggleUnderline(): Promise<void>;
   fontSize(options: FontSizeOptions): Promise<void>;
   printLogo(): Promise<void>;
+  printQRCode(options: QRCodeOptions): Promise<void>;
   tableHeader(options: TableHeaderOptions): Promise<void>;
   checkConnection(): Promise<void>;
 
@@ -71,4 +72,10 @@ export enum FontSize {
   Triple = 2,
   Quadruple = 3,
   Quintuple = 4
+}
+
+export interface QRCodeOptions {
+  text: string;
+  size?: number;
+  errorCorrection?: number;
 }

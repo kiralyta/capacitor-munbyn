@@ -17,5 +17,6 @@
 - (void)align:(CAPPluginCall *)call;
 - (void)print:(CAPPluginCall *)call;
 - (void)tableHeader:(CAPPluginCall *)call;
+- (void)printQRCode:(CAPPluginCall *)call;
 
 @end

@@ -17,4 +17,5 @@ CAP_PLUGIN(CapacitorMunbynPlugin, "CapacitorMunbyn",
     CAP_PLUGIN_METHOD(checkConnection, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(toggleBold, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(toggleUnderline, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(printQRCode, CAPPluginReturnPromise);
 )

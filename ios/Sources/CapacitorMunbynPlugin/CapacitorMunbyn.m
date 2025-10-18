@@ -40,7 +40,7 @@
     [call resolve];
 }
 
-// Disconnect WiFi Device
+// New line
 - (void)newLine:(CAPPluginCall *)call {
     NSData *commandData = [PosCommand printAndFeedLine];
 
@@ -197,6 +197,25 @@
     [self.wifiManager POSWriteCommandWithData:printBmpData];
     [call resolve];
 }
+
+- (void)printQRCode:(CAPPluginCall *)call {
+    NSString *text = [call getString:@"text" defaultValue:nil];
+    NSNumber *size = [call getNumber:@"size" defaultValue:@6]; // 1–16
+    NSNumber *errorCorrection = [call getNumber:@"errorCorrection" defaultValue:@2]; // 0=L,1=M,2=Q,3=H
+
+    if (text == nil || [text length] == 0) {
+        NSLog(@"No QR code text provided");
+        return;
+    }
+
+    NSData *qrData = [PosCommand printQRCodeWithContent:text
+                                          andModuleSize:[size intValue]
+                                   andErrorCorrection:[errorCorrection intValue]];
+
+    [self.wifiManager POSWriteCommandWithData:qrData];
+    [call resolve];
+}
+
 
 // Event when WiFi Manager connects
 - (void)POSWIFIManager:(POSWIFIManager *)manager didConnectedToHost:(NSString *)host port:(UInt16)port {

@@ -62,4 +62,8 @@ export class CapacitorMunbynWeb
   async toggleUnderline(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
   }
+
+  async printQRCode(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
 }
